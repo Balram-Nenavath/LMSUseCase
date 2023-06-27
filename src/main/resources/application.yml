@@ -1,0 +1,33 @@
+#security:
+#  oauth2:
+#    client:
+#       clientId: 3342a4bf80a76eae4106
+#       clientSecret: 5e3a21496feb3f194d1566fb325287fd7fc6a461
+#       accessTokenUri: https://github.com/login/oauth/access_token
+#       userAuthorizationUri: https://github.com/login/oauth/authorize
+#       clientAuthenticationScheme: form
+#       provider:
+#          github:
+#            user-info-uri: https://api.github.com/user
+#    resource:
+#      user-info-uri: https://api.github.com/user
+#      prefer-token-info: false 
+      
+#logging:
+#  level:
+#    org.springframework.security: DEBUG
+#    org.springframework.security.oauth2: DEBUG
+
+
+#spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    username: postgres
+#    url: jdbc:postgresql://localhost:5432/usecase
+#    password: postgres
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#
+#server:
+#  port: 2023
