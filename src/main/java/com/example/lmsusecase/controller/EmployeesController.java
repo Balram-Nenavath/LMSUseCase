@@ -21,7 +21,6 @@ import com.example.lmsusecase.dto.EmployeeDTO;
 import com.example.lmsusecase.service.EmployeeService;
 
 @RestController
-@RequestMapping("/employees")
 public class EmployeesController {
 
     @Autowired
@@ -31,7 +30,7 @@ public class EmployeesController {
     private OAuth2ClientContext oauth2ClientContext;
 
     
-    @GetMapping
+    @GetMapping("/employees/getAll")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (isAuthenticated(authentication)) {
@@ -45,5 +44,21 @@ public class EmployeesController {
     
     private boolean isAuthenticated(Authentication authentication) {
         return authentication != null && authentication.isAuthenticated();
+    }
+    
+    
+    @GetMapping("/employees/getById/{id}")
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") Long id) {
+        EmployeeDTO employeeDTO = employeeService.getEmployeeById(id);
+        if (employeeDTO != null) {
+            return new ResponseEntity<>(employeeDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @PostMapping("/employees/addEmployee")
+    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return new ResponseEntity<>(employeeService.addEmployee(employeeDTO), HttpStatus.CREATED);
     }
 }
